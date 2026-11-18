@@ -20,6 +20,7 @@ PERCENTAGE_INDICATORS = {
     "SH.XPD.CHEX.GD.ZS",
     "SH.IMM.MEAS",
     "obesity-prevalence-adults-who-gho",
+    "OBESITY-PREVALENCE-ADULTS-WHO-GHO",
     "2381",
 }
 
@@ -35,6 +36,7 @@ INDICATOR_BOUNDS = {
     "WHOSIS_000001": (0.0, 150.0),
     "OWID_LIFE_EXPECTANCY": (0.0, 150.0),
     "life-expectancy": (0.0, 150.0),
+    "LIFE-EXPECTANCY": (0.0, 150.0),
 }
 
 
@@ -140,6 +142,9 @@ def clean_observations(
         "BOTH SEX": "BTSX",
         "BOTH SEXES": "BTSX",
         "SEX_BOTH": "BTSX",
+        "SEX_MLE": "MLE",
+        "SEX_FMLE": "FMLE",
+        "SEX_BTSX": "BTSX",
         "MALE": "MLE",
         "M": "MLE",
         "FEMALE": "FMLE",

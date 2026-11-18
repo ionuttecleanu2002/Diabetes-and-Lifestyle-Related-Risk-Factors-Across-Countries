@@ -35,7 +35,7 @@ def load_worldbank_country_codes(
     for row in rows:
         if not isinstance(row, dict):
             continue
-        iso3 = str(row.get("iso3Code") or "").strip().upper()
+        iso3 = str(row.get("id") or "").strip().upper()
         region = row.get("region")
         aggregate_region = (
             isinstance(region, dict)

@@ -4,7 +4,17 @@ from pathlib import Path
 import pandas as pd
 
 
-SEX_CODES = {"Male": "MLE", "Female": "FMLE", "Both sexes": "BTSX"}
+SEX_CODES = {
+    "Male": "MLE",
+    "Female": "FMLE",
+    "Both sexes": "BTSX",
+    "MLE": "MLE",
+    "FMLE": "FMLE",
+    "BTSX": "BTSX",
+    "SEX_MLE": "MLE",
+    "SEX_FMLE": "FMLE",
+    "SEX_BTSX": "BTSX",
+}
 NORMALIZED_COLUMNS = [
     "country_iso3",
     "indicator_code",
@@ -34,7 +44,11 @@ def transform_who(raw_file: str | Path) -> pd.DataFrame:
 
         sex = "BTSX"
         if dim1_type in {"sex", "gender"}:
-            sex = SEX_CODES.get(str(item.get("Dim1") or "").strip(), "BTSX")
+            dimension_value = str(item.get("Dim1") or "").strip()
+            sex = SEX_CODES.get(
+                dimension_value,
+                SEX_CODES.get(dimension_value.upper(), "BTSX"),
+            )
 
         country_iso3 = item.get("SpatialDim")
         year = item.get("TimeDim")

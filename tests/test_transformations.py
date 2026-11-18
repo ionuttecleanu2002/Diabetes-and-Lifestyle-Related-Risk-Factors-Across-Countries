@@ -56,12 +56,12 @@ class TransformationTests(unittest.TestCase):
             [
                 {
                     "iso2Code": "RO",
-                    "iso3Code": "ROU",
+                    "id": "ROU",
                     "region": {"id": "ECS", "value": "Europe"},
                 },
                 {
                     "iso2Code": "1W",
-                    "iso3Code": "WLD",
+                    "id": "WLD",
                     "region": {"id": "NA", "value": "Aggregates"},
                 },
             ],

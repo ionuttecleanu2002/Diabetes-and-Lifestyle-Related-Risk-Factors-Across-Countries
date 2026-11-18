@@ -93,7 +93,7 @@ def extract_worldbank(
     output_path = _raw_dir(raw_dir) / f"{_safe_filename(indicator_code)}.json"
     request_url = (
         f"{WORLD_BANK_BASE_URL}/country/{country_filter}/indicator/{indicator_code}"
-        f"?format=json&per_page=20000&date={start_year}:{end_year}"
+        f"?format=json&per_page=1000&date={start_year}:{end_year}"
     )
     if output_path.exists() and not force:
         return output_path, request_url
@@ -105,7 +105,7 @@ def extract_worldbank(
             f"{WORLD_BANK_BASE_URL}/country/{country_filter}/indicator/{indicator_code}",
             params={
                 "format": "json",
-                "per_page": 20000,
+                "per_page": 1000,
                 "date": f"{start_year}:{end_year}",
                 "page": page,
             },
