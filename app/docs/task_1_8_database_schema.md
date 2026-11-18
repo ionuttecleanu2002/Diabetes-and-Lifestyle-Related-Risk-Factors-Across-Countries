@@ -13,6 +13,7 @@ The project uses a relational, star-like database schema with five tables:
 | `import_log` | Records data imports for reproducibility and auditing. |
 
 The `observation` table is the central fact table. It references the `country` and `indicator` tables through foreign keys.
+IQR outlier status is stored in the Boolean `is_outlier` column. Existing observations default to `false`; outliers remain in the database and are not deleted.
 
 ## 2. Changes for the diabetes and lifestyle project
 

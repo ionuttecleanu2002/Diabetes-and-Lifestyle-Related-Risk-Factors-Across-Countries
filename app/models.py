@@ -3,6 +3,7 @@ from decimal import Decimal
 
 from sqlalchemy import (
     BigInteger,
+    Boolean,
     DateTime,
     ForeignKey,
     Index,
@@ -75,6 +76,12 @@ class Observation(Base):
         String(50), nullable=False, default="All ages"
     )
     value: Mapped[Decimal | None] = mapped_column(Numeric(18, 4))
+    is_outlier: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+        server_default="false",
+    )
     imported_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

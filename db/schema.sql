@@ -112,6 +112,7 @@ CREATE TABLE public.observation (
     sex character varying(10) NOT NULL,
     age_group character varying(50) NOT NULL,
     value numeric(18,4),
+    is_outlier boolean DEFAULT false NOT NULL,
     imported_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
