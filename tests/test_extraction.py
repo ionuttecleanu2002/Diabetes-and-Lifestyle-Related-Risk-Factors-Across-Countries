@@ -83,6 +83,41 @@ class ExtractionTests(unittest.TestCase):
                         force=True,
                     )
 
+    def test_who_rejects_invalid_odata_structure(self):
+        response = Mock()
+        response.raise_for_status = Mock()
+        response.json.return_value = {"unexpected": []}
+
+        with tempfile.TemporaryDirectory() as directory:
+            with patch("etl.extract_who.requests.get", return_value=response):
+                with self.assertRaisesRegex(
+                    extract_who.requests.RequestException,
+                    "missing 'value'",
+                ):
+                    extract_who.extract_who(
+                        "WHOSIS_000001",
+                        raw_dir=directory,
+                        force=True,
+                    )
+
+    def test_owid_rejects_html_instead_of_csv(self):
+        response = Mock()
+        response.raise_for_status = Mock()
+        response.headers = {"Content-Type": "text/html"}
+        response.content = b"<html>not a chart</html>"
+
+        with tempfile.TemporaryDirectory() as directory:
+            with patch("etl.extract_owid.requests.get", return_value=response):
+                with self.assertRaisesRegex(
+                    extract_owid.requests.RequestException,
+                    "returned HTML",
+                ):
+                    extract_owid.extract_owid(
+                        "life-expectancy",
+                        raw_dir=directory,
+                        force=True,
+                    )
+
     def test_owid_download_validation_and_cache(self):
         response = Mock()
         response.raise_for_status = Mock()
